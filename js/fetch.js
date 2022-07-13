@@ -17,22 +17,22 @@ form.addEventListener("submit", function (e) {
     title = "";
     renderTodos();
 
-    fetch("https://jsonplaceholder.typicode.com/posts", {
-      method: "POST",
-      body: JSON.stringify({
-        title: title,
-        author: author,
-        body: body,
-      }),
-      headers: {
-        "Content-Type": "application/json; charset=UTF-8",
-      },
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        console.log(data);
-      });
+    //   fetch("https://jsonplaceholder.typicode.com/posts", {
+    //     method: "POST",
+    //     body: JSON.stringify({
+    //       title: title,
+    //       author: author,
+    //       body: body,
+    //     }),
+    //     headers: {
+    //       "Content-Type": "application/json; charset=UTF-8",
+    //     },
+    //   })
+    //     .then(function (response) {
+    //       return response.json();
+    //     })
+    //     .then(function (data) {
+    //       console.log(data);
+    //     });
   }
 });

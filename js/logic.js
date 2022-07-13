@@ -1,17 +1,44 @@
 let form = document.getElementById("form");
 
-let LocalData = JSON.parse(localStorage.getItem("posts"));
-let data = LocalData ? [...LocalData] : [];
+let LocalData = JSON.parse(localStorage.getItem("posts")) || [];
+let data = LocalData;
 
-let list = document.createElement("ul");
+let list = document.createElement("div");
 list.id = "list";
+list.className = "list";
+
+let searchIn = document.createElement("div");
+searchIn.className = "serachIn";
+let searchInput = document.createElement("input");
+searchInput.className = "searchInput";
+searchInput.addEventListener("input", searchHandler);
+
+function searchHandler() {
+  if (searchInput.value === "") {
+    data = LocalData;
+    renderTodos();
+  } else {
+    const searchedArray = LocalData.filter((item) =>
+      item.task.toLowerCase().includes(searchInput.value.toLocaleLowerCase()) 
+    );
+    data = searchedArray;
+    renderTodos();
+  }
+}
+
+let search = document.createElement("img");
+search.className = "search";
+search.src = "./image/search.png";
+
+searchIn.append(searchInput, search);
+form.append(searchIn);
 form.append(list);
 
-let last_id = LocalData && LocalData[LocalData.length - 1].id + 1;
+let last_id = LocalData.length && LocalData[LocalData.length - 1].id + 1;
 let counter = LocalData ? last_id : 0;
 
 const createTodoItem = ({ task, id }) => {
-  let li = document.createElement("li");
+  let li = document.createElement("div");
   li.className = "li";
 
   let input = document.createElement("input");
@@ -39,7 +66,7 @@ const createTodoItem = ({ task, id }) => {
   let deleteBtn = document.createElement("img");
   deleteBtn.id = `${id}`;
   deleteBtn.className = "deleteBtn";
-  deleteBtn.src = src = "./image/rubbish.png";
+  deleteBtn.src = "./image/rubbish.png";
   deleteBtn.addEventListener("click", onDelete);
 
   list.append(li);
