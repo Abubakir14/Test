@@ -19,7 +19,7 @@ function searchHandler() {
     renderTodos();
   } else {
     const searchedArray = LocalData.filter((item) =>
-      item.task.toLowerCase().includes(searchInput.value.toLocaleLowerCase()) 
+      item.task.toLowerCase().includes(searchInput.value.toLocaleLowerCase())
     );
     data = searchedArray;
     renderTodos();
@@ -34,7 +34,7 @@ searchIn.append(searchInput, search);
 form.append(searchIn);
 form.append(list);
 
-let last_id = LocalData.length && LocalData[LocalData.length - 1].id + 1;
+let last_id = LocalData && LocalData[LocalData.length - 1].id + 1;
 let counter = LocalData ? last_id : 0;
 
 const createTodoItem = ({ task, id }) => {
